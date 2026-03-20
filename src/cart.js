@@ -6,17 +6,9 @@ class Cart {
   }
 
   addItem(sku, quantity) {
-    if (!Number.isInteger(quantity) || quantity < 1) {
-      throw new Error('Quantity must be greater than 0');
-    }
-    const product = this.catalog.findBySku(sku);
-    if (!product) throw new Error('Product not found');
-
-    if (this.inventory) {
-      const available = this.inventory.getAvailable(sku);
-      if (quantity > available) throw new Error('Insufficient inventory');
-    }
-
+    this._validateQuantity(quantity);
+    const product = this._getProduct(sku);
+    this._checkInventory(sku, quantity);
     this.items[sku] = { product, quantity };
   }
 
@@ -32,6 +24,23 @@ class Cart {
   getItems() {
     return this.items;
   }
-}
 
+  //  private helpers 
+  _validateQuantity(quantity) {
+    if (!Number.isInteger(quantity) || quantity < 1)
+      throw new Error('Quantity must be greater than 0');
+  }
+
+  _getProduct(sku) {
+    const product = this.catalog.findBySku(sku);
+    if (!product) throw new Error('Product not found');
+    return product;
+  }
+
+  _checkInventory(sku, quantity) {
+    if (!this.inventory) return;
+    const available = this.inventory.getAvailable(sku);
+    if (quantity > available) throw new Error('Insufficient inventory');
+  }
+}
 module.exports = Cart;

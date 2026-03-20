@@ -1,12 +1,18 @@
+const BULK_THRESHOLD = 10;
+const BULK_RATE = 0.10;
+const ORDER_THRESHOLD = 1000;
+const ORDER_RATE = 0.05;
+
 function bulkDiscount(items) {
-  return items.map(item => {
+  return items.reduce((sum, item) => {
     const lineTotal = item.price * item.quantity;
-    return item.quantity >= 10 ? lineTotal * 0.90 : lineTotal;
-  }).reduce((sum, val) => sum + val, 0);
+    const discount = item.quantity >= BULK_THRESHOLD ? lineTotal * BULK_RATE : 0;
+    return sum + lineTotal - discount;
+  }, 0);
 }
 
 function orderDiscount(subtotal) {
-  return subtotal >= 1000 ? subtotal * 0.95 : subtotal;
+  return subtotal >= ORDER_THRESHOLD ? subtotal * (1 - ORDER_RATE) : subtotal;
 }
 
 function applyDiscounts(items) {
