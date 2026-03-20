@@ -1,4 +1,3 @@
-// REQUIREMENT F - Order + Repository Tests
 const Checkout = require('../src/checkout');
 const Order = require('../src/order');
 const OrderRepository = require('../src/orderRepository');

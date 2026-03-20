@@ -1,4 +1,3 @@
-// REQUIREMENT D - Discount Tests
 const { applyDiscounts, bulkDiscount, orderDiscount } = require('../src/discount');
 
 describe('Discount Rules', () => {

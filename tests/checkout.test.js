@@ -1,4 +1,3 @@
-// REQUIREMENT E - Checkout Tests
 const Checkout = require('../src/checkout');
 
 describe('Checkout', () => {
