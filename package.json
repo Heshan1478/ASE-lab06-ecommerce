@@ -1,0 +1,13 @@
+{
+  "name": "ecommerce-tdd",
+  "version": "1.0.0",
+  "description": "TDD E-Commerce Assignment - JavaScript + Jest",
+  "scripts": {
+    "test": "jest",
+    "test:verbose": "jest --verbose",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
